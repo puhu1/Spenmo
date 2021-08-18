@@ -35,12 +35,17 @@ export default class AddNewCard extends React.Component {
             <FormControl>
               <Input placeholder="Card Holder Name" />
             </FormControl>
-            <FormControl>
-              <Input placeholder="Last Four Digit" />
-            </FormControl>
-            <FormControl>
-              <Input placeholder="Expiry Date" />
-            </FormControl>
+            <div>
+              <FormControl>
+                <Input placeholder="Last Four Digit" />
+              </FormControl>
+            </div>
+            <div>
+              <FormControl>
+                <Input placeholder="Expiry Date" />
+              </FormControl>
+            </div>
+
             <DialogActions>
               <Button variant="contained" onClick={this.handleClose}>
                 Close
