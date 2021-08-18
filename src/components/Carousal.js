@@ -20,9 +20,9 @@ function CarouselCard() {
   };
 
   const [settings, setSettings] = useState(config);
-  const [openDialog,setOpenDialog] = useState(false);
-  const [openNewCardDialog,setOpenNewCardDialog] = useState(false);
-
+  const [openDialog, setOpenDialog] = useState(false);
+  const [openNewCardDialog, setOpenNewCardDialog] = useState(false);
+  let data = "";
 
   return (
     <div classname="App">
@@ -37,21 +37,34 @@ function CarouselCard() {
               textAlign: "center",
               paddingTop: "30px",
               marginTop: "10px",
-              borderRadius: '2%'
+              borderRadius: "2%",
             }}
           >
             <div className="card-body">
               <AddCircleIcon
                 style={{ backgroundColor: "#00000", fontSize: "18px" }}
               />
-              <p style={{fontSize: '18px',fontWeight:'bolder',paddingBottom: '10px',paddingTop: '15px'}} >Add New Card</p>
+              <p
+                style={{
+                  fontSize: "18px",
+                  fontWeight: "bolder",
+                  paddingBottom: "10px",
+                  paddingTop: "15px",
+                }}
+              >
+                Add New Card
+              </p>
             </div>
           </div>
         </div>
 
         {CARD_DATA.map((v, i) => {
+          data = v;
           return (
-            <div style={{ padding: "15px" }} onClick={() => setOpenDialog(!openDialog)}>
+            <div
+              style={{ padding: "15px" }}
+              onClick={() => setOpenDialog(!openDialog)}
+            >
               <div
                 key={i.toString()}
                 style={{
@@ -59,32 +72,62 @@ function CarouselCard() {
                   padding: "10px",
                   margin: "10px",
                   backgroundColor: v.color,
-                  borderRadius: '2%'
+                  borderRadius: "2%",
                 }}
               >
                 <div className="card-body">
-                  <div style={{fontSize: '18px',fontWeight:'bolder',color:'#ffffff',paddingBottom: '10px',paddingTop: '15px'}}>{v.card_name}</div>
-                  <div className="card-text"style={{fontSize: '18px',fontWeight:'bolder',color:'#ffffff',paddingBottom: '5px'}} >{v.card_last_four}</div>
-                  <p style={{fontSize: '18px',fontWeight:'bolder',color:'#ffffff',paddingBottom: '2px'}}> Expiry</p>
-                  <div className="card-text"style={{fontSize: '18px',fontWeight:'bolder',color:'#ffffff',paddingBottom: '10px'}} >{v.expiry}</div>
-
+                  <div
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: "bolder",
+                      color: "#ffffff",
+                      paddingBottom: "10px",
+                      paddingTop: "15px",
+                    }}
+                  >
+                    {v.card_name}
+                  </div>
+                  <div
+                    className="card-text"
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: "bolder",
+                      color: "#ffffff",
+                      paddingBottom: "5px",
+                    }}
+                  >
+                    {v.card_last_four}
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: "bolder",
+                      color: "#ffffff",
+                      paddingBottom: "2px",
+                    }}
+                  >
+                    {" "}
+                    Expiry
+                  </p>
+                  <div
+                    className="card-text"
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: "bolder",
+                      color: "#ffffff",
+                      paddingBottom: "10px",
+                    }}
+                  >
+                    {v.expiry}
+                  </div>
                 </div>
               </div>
-              {openDialog ? (
-                  <div>
-                  <p>{v.card_name}
-                  </p>
-          <DialogComponent open={openDialog} name={v.card_name} card_data={v}/>
-          </div>
-        ) : null}
-        {openNewCardDialog ? (
-          <AddNewCard open={openNewCardDialog} />
-        ) : null}
             </div>
           );
         })}
       </Slider>
-      
+      {openDialog ? <DialogComponent card_data={data} /> : null}
+      {openNewCardDialog ? <AddNewCard /> : null}
     </div>
   );
 }
